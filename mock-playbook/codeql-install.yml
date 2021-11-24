@@ -1,0 +1,34 @@
+---
+        - name: test
+          hosts: localhost
+
+          vars:
+               clone_path: '/home/vagrant/codeql_repo'
+
+          tasks:
+                - name: bes-shell fetch
+                  become: yes
+                  delegate_to: localhost
+                  get_url:
+                    url: https://github.com/github/codeql-cli-binaries/releases/download/v2.7.1/codeql-linux64.zip
+                    dest: "{{ clone_path }}"
+                    timeout: 300
+
+                - name: Extracting the codeql zip file
+                  shell: unzip "{{ clone_path }}"
+
+                - name: Ensure codeql installed
+                  shell: sh codeql/codeql --version
+                  register: codeql_version
+
+                - name: Download CodeQL sample queries for all supported languages.
+                  git:
+                    repo: https://github.com/github/codeql.git
+                    dest: "{{ clone_path }}"
+                    clone: yes
+                    update: yes
+
+                - debug:
+                        var:
+                             codeql_version.stdout_lines
+
