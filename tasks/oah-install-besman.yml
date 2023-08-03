@@ -1,0 +1,42 @@
+---
+- name: Installing dependencies
+  become: yes
+  block:
+    - name: Checking gh Installation
+      shell: gh --version
+      register: gh_output
+      ignore_errors: true
+
+    - name: Install gh
+      apt:
+        name: sudo apt update && gh
+        state: present
+      when: gh_output.rc != 0
+
+    - name: Checking Ansible Installation
+      shell: ansible --version
+      register: ansible_output
+      ignore_errors: true
+
+    - name: Install Ansible
+      apt:
+        name: ansible
+        state: present
+      when: ansible_output.rc != 0
+
+- name: Download BeSman Installer
+  get_url:
+    url: https://raw.githubusercontent.com/Be-Secure/BeSman/dist/dist/get.besman.io
+    dest: /tmp/besman-installer.sh
+    mode: 'u+rwx'
+  register: download
+
+- name: Installing BeSman
+  shell: /tmp/besman-installer.sh
+  when: download is defined
+
+- name: Removeing besman-installer.sh
+  file:
+    path: /tmp/besman-installer.sh
+    state: absent
+  when: download is defined

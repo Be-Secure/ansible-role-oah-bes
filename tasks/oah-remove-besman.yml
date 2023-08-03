@@ -1,0 +1,6 @@
+---
+- name: Remove BeSman
+  become: yes
+  file:
+    path: /{{ ansible_env.HOME }}/.besman
+    state: absent
