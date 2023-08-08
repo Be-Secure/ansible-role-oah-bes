@@ -11,7 +11,13 @@
       shell: gh --version
       register: gh_output
       ignore_errors: true
-  
+
+    - name: Install gh
+      apt:
+        name: gh
+        state: present
+      when: gh_output.rc != 0
+      
     #- name: Install gh using snap
      # snap:
      #   name: gh
