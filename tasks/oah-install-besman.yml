@@ -2,14 +2,19 @@
 - name: Installing dependencies
   become: yes
   block:
+    - name: Update apt Packages
+      apt:
+        update_cache: yes
+        cache_valid_time: 86400
+        
     - name: Checking gh Installation
       shell: gh --version
       register: gh_output
       ignore_errors: true
-
+  
     - name: Install gh
       apt:
-        name: sudo apt update && gh
+        name: gh
         state: present
       when: gh_output.rc != 0
 
