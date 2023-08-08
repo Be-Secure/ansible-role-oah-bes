@@ -16,7 +16,14 @@
       apt:
         name: gh
         state: present
+      register: gh_install
       when: gh_output.rc != 0
+      
+    - name: Install conjure-up for Canonical Kubernetes
+      community.general.snap:
+        name: gh
+        classic: yes
+      when: gh_install is not defined
 
     - name: Checking Ansible Installation
       shell: ansible --version
