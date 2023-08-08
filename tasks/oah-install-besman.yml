@@ -19,7 +19,7 @@
       register: gh_install
       when: gh_output.rc != 0
       
-    - name: Install conjure-up for Canonical Kubernetes
+    - name: Install gh using snap
       community.general.snap:
         name: gh
         classic: yes
