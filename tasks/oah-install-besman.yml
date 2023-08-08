@@ -12,18 +12,11 @@
       register: gh_output
       ignore_errors: true
   
-    - name: Install gh
-      apt:
-        name: gh
-        state: present
-      register: gh_install
-      when: gh_output.rc != 0
-      
     - name: Install gh using snap
-      community.general.snap:
+      snap:
         name: gh
         classic: yes
-      when: gh_install is not defined
+      when: gh_output.rc != 0
 
     - name: Checking Ansible Installation
       shell: ansible --version
