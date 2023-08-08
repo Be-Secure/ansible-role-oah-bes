@@ -14,9 +14,7 @@
       ignore_errors: true
 
     - name: Install gh
-      apt:
-        name: gh
-        state: present
+      shell: snap install gh 
       when: gh_output.rc != 0
       
     #- name: Install gh using snap
