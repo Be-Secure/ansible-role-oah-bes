@@ -16,6 +16,7 @@
       snap:
         name: gh
         classic: yes
+      ignore_errors: true
       when: gh_output.rc != 0
 
     - name: Checking Ansible Installation
