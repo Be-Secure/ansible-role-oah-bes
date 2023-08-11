@@ -2,7 +2,6 @@
 - name: Installing dependencies
   become: yes
   become_method: su
-  become_user: nobody
   block:
     - name: Update and upgrade apt packages
       apt:
