@@ -1,7 +1,6 @@
 ---
 - name: Installing dependencies
   become: yes
-  become_method: su
   block:
     - name: Update and upgrade apt packages
       apt:
