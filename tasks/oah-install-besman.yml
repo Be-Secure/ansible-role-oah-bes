@@ -1,6 +1,7 @@
 ---
 - name: Installing dependencies
   become: yes
+  become_user: vagrant
   block:
     - name: Update and upgrade apt packages
       apt:
