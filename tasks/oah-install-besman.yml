@@ -1,7 +1,8 @@
 ---
 - name: Installing dependencies
   become: yes
-  become_user: vagrant
+  become_method: su
+  become_user: nobody
   block:
     - name: Update and upgrade apt packages
       apt:
