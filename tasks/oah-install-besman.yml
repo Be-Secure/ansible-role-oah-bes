@@ -39,10 +39,11 @@
   get_url:
     url: https://raw.githubusercontent.com/Be-Secure/BeSman/dist/dist/get.besman.io
     dest: /tmp/besman-installer.sh
-    mode: 'u+rwx'
+    mode: '775'
   register: download
 
 - name: Installing BeSman
+  become_user: "{{ lookup('ansible.builtin.env', 'USER')|default('nobody', True) }}"
   shell: /tmp/besman-installer.sh
   when: download is defined
 
