@@ -39,8 +39,13 @@
   get_url:
     url: https://raw.githubusercontent.com/Be-Secure/BeSman/dist/dist/get.besman.io
     dest: /tmp/besman-installer.sh
-    mode: '775'
+    mode: '777'
   register: download
+
+#- name: Set Permission
+#  become: yes
+#  shell: chmod +x /tmp/besman-installer.sh
+#  when: download is defined
 
 - name: Installing BeSman
   become: yes
