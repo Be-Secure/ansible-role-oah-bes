@@ -43,6 +43,7 @@
   register: download
 
 - name: Installing BeSman
+  become: yes
   become_user: "{{ lookup('ansible.builtin.env', 'USER')|default('nobody', True) }}"
   shell: /tmp/besman-installer.sh
   when: download is defined
