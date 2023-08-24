@@ -49,8 +49,8 @@
   shell: /tmp/besman-installer.sh
   when: download is defined
 
-#- name: Removeing besman-installer.sh
-#  file:
-#    path: /tmp/besman-installer.sh
- #   state: absent
- # when: download is defined
+- name: Removeing besman-installer.sh
+  file:
+    path: /tmp/besman-installer.sh
+    state: absent
+  when: download is defined
